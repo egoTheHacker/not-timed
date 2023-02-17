@@ -10,7 +10,7 @@ WORKDIR /app
 COPY --from=build-front /app/package.json /app/build ./
 FROM python:latest as build-back
 WORKDIR /app
-COPY --from=build-front /app/package.json /app/build ./
+COPY --from=build-front /app/build ./
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 COPY . .
