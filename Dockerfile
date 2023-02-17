@@ -12,7 +12,7 @@ FROM python:latest as build-back
 WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
-COPY --from=deploy build /app/
+COPY --from=build-front build /app/
 COPY . .
 CMD ["python", "backend/main.py"]
 EXPOSE 5000:5000
