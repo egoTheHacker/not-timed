@@ -19,13 +19,10 @@ app.add_middleware(
 async def api() -> dict:
     return dict(message="hola, k ase")
 
-@app.get('/')
-async def main():
-    return HTMLResponse('<center><h1>Hola notion</h1></center>')
 
 try:
     print('Intentando montar statics...')
-    app.mount('/', StaticFiles(directory='frontend/dist'), name='static')
+    app.mount('', StaticFiles(directory='frontend/build', html=True), name='static')
 except RuntimeError as e:
     print(f'Puede que dist no exista. [Error]: {e}')
 
