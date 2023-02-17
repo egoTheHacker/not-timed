@@ -2,7 +2,7 @@
 FROM node:current as build-front
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --frozen-lockfile
 COPY . .
 RUN yarn run build
 # FROM node:current as deploy
