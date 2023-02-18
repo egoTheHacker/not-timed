@@ -1,10 +1,13 @@
 # syntax=docker/dockerfile:1
 FROM node:current as build-front
 WORKDIR /app
-COPY . .
 ENV NODE_ENV=production
-RUN yarn install
-RUN yarn run build
+COPY ./package.json /app
+COPY ./package-lock.json /app
+
+RUN npm ci
+COPY ./ /app
+RUN npm run build
 # FROM node:current as deploy
 # WORKDIR /app
 # COPY --from=build-front /app/package.json /app/build ./
