@@ -2,6 +2,7 @@
 FROM node:current as build-front
 WORKDIR /app
 COPY . .
+ENV NODE_ENV=production
 RUN yarn install
 RUN yarn run build
 # FROM node:current as deploy
