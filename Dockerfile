@@ -2,8 +2,8 @@
 FROM node:current as build-front
 WORKDIR /app
 ENV NODE_ENV=production
-COPY ./package.json /app
-COPY ./package-lock.json /app
+COPY package.json /app
+COPY package-lock.json /app
 
 RUN npm ci
 COPY ./ /app
@@ -13,7 +13,7 @@ RUN npm run build
 # COPY --from=build-front /app/package.json /app/build ./
 FROM python:latest as build-back
 WORKDIR /app
-COPY --from=build-front /app/build ./
+# COPY --from=build-front /app/build ./
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
 COPY . .
